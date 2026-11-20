@@ -65,19 +65,10 @@ jobs:
           "previous_version=$previousVersion" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
           "version_bumped=$versionBumped" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
 
-      - name: Build standalone application
-        if: steps.version_check.outputs.version_bumped == 'true'
-        run: >
-          uv run nuitka --mode=standalone --windows-console-mode=disable --output-dir=./build-nuitka --enable-plugin=pyside6 --assume-yes-for-downloads ./src/assetshare
-
-      - name: Create ZIP package
+      - name: Build standalone package
         if: steps.version_check.outputs.version_bumped == 'true'
         shell: pwsh
-        run: >
-          Compress-Archive
-          -Path ./build-nuitka/assetshare.dist/*
-          -DestinationPath ./build-nuitka/assetshare-desktop-v${{ steps.version_check.outputs.current_version }}-windows.zip
-          -Force
+        run: ./scripts/build.ps1 nuitka
 
       - name: Generate release notes
         if: steps.version_check.outputs.version_bumped == 'true'
@@ -103,4 +94,4 @@ jobs:
           name: v${{ steps.version_check.outputs.current_version }}
           tag_name: v${{ steps.version_check.outputs.current_version }}
           body_path: AssetShare-desktop/release-notes.md
-          files: AssetShare-desktop/build-nuitka/assetshare-desktop-v${{ steps.version_check.outputs.current_version }}-windows.zip
+          files: AssetShare-desktop/dist/assetshare-desktop-v${{ steps.version_check.outputs.current_version }}-windows.zip
