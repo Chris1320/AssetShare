@@ -1,0 +1,14 @@
+---
+flags:
+  server:
+    paths:
+      - AssetShare-server/
+    carryforward: true
+  desktop:
+    paths:
+      - AssetShare-desktop/
+    carryforward: true
+  web:
+    paths:
+      - AssetShare-web/
+    carryforward: true
