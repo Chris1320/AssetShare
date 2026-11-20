@@ -12,12 +12,12 @@ you to upload, manage, and share digital assets for media production.
 
 ## Requirements
 
-| Requirement   | AssetShare Server  | AssetShare Web     | AssetShare Desktop |
-| ------------- | ------------------ | ------------------ | ------------------ |
-| Docker/Podman | `29.9.3` / `5.8.9` | `29.9.3` / `5.8.9` | `29.9.3` / `5.8.9` |
-| uv            | `0.13.7`           |                    | `0.13.7`           |
-| Python        | `3.14`             |                    | `3.15`             |
-| Bun           |                    | `1.4.2`            |                    |
+| Requirement   | AssetShare Server        | AssetShare Web           | AssetShare Desktop |
+| ------------- | ------------------------ | ------------------------ | ------------------ |
+| Docker/Podman | >= `29.9.3` / >= `5.8.9` | >= `29.9.3` / >= `5.8.9` |                    |
+| uv            | >= `0.13.7`              |                          | >= `0.13.7`        |
+| Python        | `3.14`                   |                          | `3.15`             |
+| Bun           |                          | `1.4.2`                  |                    |
 
 ## Installation
 
@@ -32,7 +32,7 @@ you to upload, manage, and share digital assets for media production.
 git clone https://github.com/Chris1320/AssetShare.git
 cd AssetShare
 # Edit the configuration files as needed
-docker-compose up -d
+docker compose up -d
 # or if using Podman...
 podman compose up -d
 ```
