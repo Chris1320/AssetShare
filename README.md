@@ -2,9 +2,14 @@
     <img src="./assets/logo.svg" alt="AssetShare Logo" width="200">
     <h1>AssetShare</h1>
     <p>Multi-User Digital Asset Management (DAM) System</p>
+    <div>
+        <a href="https://codecov.io/gh/Chris1320/AssetShare">
+            <img
+                src="https://codecov.io/gh/Chris1320/AssetShare/graph/badge.svg?token=03722ScIu1"
+                alt="codecov"
+            ></a>
+    </div>
 </div>
-
-[![codecov](https://codecov.io/gh/Chris1320/AssetShare/graph/badge.svg?token=03722ScIu1)](https://codecov.io/gh/Chris1320/AssetShare)
 
 **AssetShare** is a multi-user Digital Asset Management (DAM) system that allows
 you to upload, manage, and share digital assets for media production.
