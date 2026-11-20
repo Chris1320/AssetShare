@@ -24,3 +24,12 @@ dev = [
     "pytest>=9.2.0",
     "pytest-cov>=7.1.0",
 ]
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint."messages control"]
+disable = [
+    "C0114", # missing-module-docstring
+    "C0115", # missing-class-docstring
+]

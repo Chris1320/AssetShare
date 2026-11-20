@@ -26,3 +26,21 @@ dev = [
     "pytest>=9.2.0",
     "pytest-cov>=7.1.0",
 ]
+
+[tool.uv.build-backend]
+module-name = "assetshare"
+
+[tool.isort]
+profile = "black"
+
+[tool.pylint.main]
+extension-pkg-allow-list = ["PySide6"]
+
+[tool.pylint.typecheck]
+generated-members = ["connect", "emit"]
+
+[tool.pylint."messages control"]
+disable = [
+    "C0114", # missing-module-docstring
+    "C0115", # missing-class-docstring
+]
