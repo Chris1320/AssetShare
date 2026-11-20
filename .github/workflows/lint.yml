@@ -1,0 +1,144 @@
+---
+name: Codebase Style
+permissions:
+    contents: read
+    pull-requests: read
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+    cancel-in-progress: true
+
+jobs:
+    changes:
+        name: Detect Changes
+        runs-on: ubuntu-latest
+        outputs:
+            server: ${{ steps.filter.outputs.server }}
+            desktop: ${{ steps.filter.outputs.desktop }}
+            web: ${{ steps.filter.outputs.web }}
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Check modified paths
+              uses: dorny/paths-filter@v3
+              id: filter
+              with:
+                  filters: |
+                      server:
+                          - 'AssetShare-server/**'
+                          - '.github/workflows/lint.yml'
+                      desktop:
+                          - 'AssetShare-desktop/**'
+                          - '.github/workflows/lint.yml'
+                      web:
+                          - 'AssetShare-web/**'
+                          - '.github/workflows/lint.yml'
+
+    lint-server:
+        name: Lint Server
+        needs: changes
+        if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.server == 'true'
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: AssetShare-server
+        env:
+            target_dirs: ./src ./tests
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v5
+              with:
+                  version: "0.11.1"
+                  enable-cache: true
+                  cache-dependency-glob: "AssetShare-server/uv.lock"
+                  python-version-file: "AssetShare-server/.python-version"
+
+            - name: Set up Python
+              run: uv python install
+
+            - name: Install project
+              run: uv sync --group dev
+
+            - name: Lint Codebase using pylint
+              run: uv run pylint --fail-under=9 $target_dirs
+
+            - name: Check coding style using black
+              run: uv run black --check --verbose $target_dirs
+
+            - name: Check imports organization using isort
+              run: uv run isort --check-only --diff --profile black $target_dirs
+
+    lint-desktop:
+        name: Lint Desktop
+        needs: changes
+        if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.desktop == 'true'
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: AssetShare-desktop
+        env:
+            target_dirs: ./src ./tests
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v5
+              with:
+                  version: "0.11.1"
+                  enable-cache: true
+                  cache-dependency-glob: "AssetShare-desktop/uv.lock"
+                  python-version-file: "AssetShare-desktop/.python-version"
+
+            - name: Set up Python
+              run: uv python install
+
+            - name: Install project
+              run: uv sync --group dev
+
+            - name: Lint Codebase using pylint
+              run: uv run pylint --extension-pkg-allow-list=PySide6 --fail-under=9 $target_dirs
+
+            - name: Check coding style using black
+              run: uv run black --check --verbose $target_dirs
+
+            - name: Check imports organization using isort
+              run: uv run isort --check-only --diff --profile black $target_dirs
+
+    lint-web:
+        name: Lint Web
+        needs: changes
+        if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.web == 'true'
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: AssetShare-web
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Bun
+              uses: oven-sh/setup-bun@v2
+
+            - name: Install dependencies
+              run: bun install --frozen-lockfile
+
+            - name: Run ESLint
+              run: bun run lint
+
+            - name: Check formatting with Prettier
+              run: bun run check
