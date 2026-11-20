@@ -1,11 +1,11 @@
-import { Card } from '@heroui/react'
-import { createFileRoute } from '@tanstack/react-router'
+import { Card } from "@heroui/react"
+import { createFileRoute } from "@tanstack/react-router"
 
-import { DESCRIPTION, NAME, VERSION } from '@/lib/info'
+import { DESCRIPTION, NAME, VERSION } from "@/lib/info"
 
-export const Route = createFileRoute('/')({ component: HomePage })
+export const Route = createFileRoute("/")({ component: HomePage })
 
-function HomePage() {
+export function HomePage() {
   return (
     <main className="flex min-h-screen items-center justify-center p-6">
       <Card className="w-full max-w-md">

@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "eslint",
     "format": "prettier --write . && eslint --fix",
-    "check": "prettier --check ."
+    "check": "prettier --check .",
+    "test": "vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
     "@heroui/react": "^3.2.7",
@@ -30,16 +31,21 @@
     "@tailwindcss/typography": "^0.5.20",
     "@tanstack/devtools-vite": "0.8.7",
     "@tanstack/eslint-config": "0.5.0",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
+    "@vitest/coverage-v8": "^5.1.1",
     "dotenv": "^17.4.2",
     "eslint": "^9.39.5",
+    "jsdom": "^31.0.1",
     "prettier": "^3.10.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "vite": "^8.3.8"
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
