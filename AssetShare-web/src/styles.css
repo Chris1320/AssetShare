@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import '@heroui/styles';
+@import "tailwindcss";
+@import "@heroui/styles";
 @plugin '@tailwindcss/typography';
 
 :root {
@@ -22,7 +22,7 @@
 }
 
 .dark,
-[data-theme='dark'] {
+[data-theme="dark"] {
   --accent: oklch(0.78 0.09 245);
   --accent-foreground: oklch(0.18 0.03 250);
 
