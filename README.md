@@ -4,6 +4,8 @@
     <p>Multi-User Digital Asset Management (DAM) System</p>
 </div>
 
+[![codecov](https://codecov.io/gh/Chris1320/AssetShare/graph/badge.svg?token=03722ScIu1)](https://codecov.io/gh/Chris1320/AssetShare)
+
 **AssetShare** is a multi-user Digital Asset Management (DAM) system that allows
 you to upload, manage, and share digital assets for media production.
 
@@ -63,3 +65,7 @@ git clone https://github.com/Chris1320/AssetShare.git
 Set-Location AssetShare\AssetShare-desktop
 & .\scripts\build.ps1 nuitka
 ```
+
+## Development
+
+![Codecov Graph](https://codecov.io/gh/Chris1320/AssetShare/graphs/sunburst.svg?token=03722ScIu1)
