@@ -13,7 +13,7 @@
     "test": "vitest run --coverage --reporter=default --reporter=junit --outputFile.junit=junit.xml"
   },
   "dependencies": {
-    "@heroui/react": "^3.2.7",
+    "@heroui/react": "^3.2.8",
     "@heroui/styles": "^3.2.7",
     "@tailwindcss/vite": "^4.3.5",
     "@tanstack/react-devtools": "0.10.15",
