@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@heroui/react": "^3.2.7",
-    "@heroui/styles": "^3.2.7",
+    "@heroui/styles": "^3.2.8",
     "@tailwindcss/vite": "^4.3.5",
     "@tanstack/react-devtools": "0.10.15",
     "@tanstack/react-router": "1.170.46",
